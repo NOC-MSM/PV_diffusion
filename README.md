@@ -6,6 +6,8 @@ by
 
 V.O. Ivchenko and B. Sinha
 
+[![DOI](https://zenodo.org/badge/494015108.svg)](https://zenodo.org/badge/latestdoi/494015108)
+
 Figures 1, 2, 3, 4 9 and 15 were plotted using the FERRET package (https://ferret.pmel.noaa.gov/Ferret/)
 
 Ferret .jnl files used are in subdirectory ferret_jnls
