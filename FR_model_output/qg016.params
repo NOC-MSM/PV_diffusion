@@ -1,0 +1,51 @@
+ 
+ 
+ QUASIGEOSTROPHIC CHANNEL SIMULATION
+ 
+ 
+ ----------------------------------------------------
+ INPUT PARAMETERS
+ ----------------------------------------------------
+ MODEL RUN NO. :     10
+ LENGTH OF CHANNEL : 4000.0 KM
+ WIDTH OF CHANNEL : 1000.0 KM
+ DEPTH OF CHANNEL : 5000.0 M
+ CHARACTERISTIC SPEED : 0.1 M S**-1
+ SURFACE WINDSTRESS(MAX. AMPLITUDE) : 0.4 N M**-2
+ MEAN DENSITY : 1000.0 KGM**-3
+ CENTRAL LATITUDE OF CHANNEL :  -50.0 DEGREES
+ BOTTOM FRICTION :   0.10000000E-06 S**-1
+ LATERAL FRICTION :   0.10000000E+11 M**4 S**-1
+ BRUNT-VAISALA FREQ.(MAX.) :   0.45780610E-02 S**-1
+ TIMESTEP : 2700.0 S
+ FIRST TIMESTEP :      0
+ LAST TIMESTEP : ******
+ OUTPUT INTERVAL :    160 TIMESTEPS
+ LAST DAY OF INTEGRATION : ****** DAYS
+ FIRST DAY OF INTEGRATION :    0.0 DAYS
+ SAMPLING INTERVAL :    5.0 DAYS
+ ----------------------------------------------------
+ OTHER PARAMETERS
+ ----------------------------------------------------
+ NO. OF GRIDPOINTS(X-DIRN) : 402
+ NO. OF GRIDPOINTS(Y-DIRN) : 101
+ NO. OF GRIDPOINTS(Z-DIRN) : 101
+ NO. OF VERTICAL MODES :  1
+ RESOLUTION(X-DIRN) :  10.0 KM
+ RESOLUTION(Y-DIRN) :  10.0 KM
+ ----------------------------------------------------
+ CONSTANTS
+ ----------------------------------------------------
+ RADIUS OF THE EARTH : 6370.0 KM
+ EARTH'S ROTATION RATE :   0.72722052E-04 RAD S**-1
+ ----------------------------------------------------
+ DERIVED PARAMETERS
+ ----------------------------------------------------
+ CORIOLIS PARAMETER :   0.10000000E-03 S**-1
+ BETA :   0.14000000E-10S**-1 M**-1
+ VERTICAL STRUCTURE :  VERTICAL STRUCTURE: BAROTROPI
+ WIND FORCING       :  WINDFORCING : SINUSOIDAL     
+ BOTTOM TOPOGRAPHY  : case A topography             
+ ADVECTION          : ON 
+ INITIALISATION     : INITIAL FLOW FIELD : ZERO STAT
+ MEAN STATISTICS CALCULATED

@@ -1,0 +1,47 @@
+ ! NOAA/PMEL TMAP
+ ! FERRET v6.93  
+ ! Linux 2.6.32-504.16.2.el6.x86_64 64-bit - 11/10/15
+ ! 19-Oct-20 09:56     
+
+go bold
+
+!define axes: channel length = 4000km, width = 1000km
+def ax/x=0:3990:10 xax
+def ax/y=0:1000:10 yax
+
+! define horizontal grid
+def grid/x=xax/y=yax gax
+
+! read in data (first topography then streamfunctions)
+file/var=topography/g=gax        ../CR_model_output/fig9a.txt
+file/var=streamfunction1/g=gax   ../CR_model_output/fig9b.txt
+file/var=streamfunction2/g=gax   ../CR_model_output/fig9c.txt
+
+!define a viewport for each panel
+define viewport/x=0:0.8/y=0.50:0.95 v1
+define viewport/x=0:0.8/y=0.25:0.70 v2
+define viewport/x=0:0.8/y=0.00:0.45 v3
+
+set mode metafile
+
+!first panel
+set viewport v1; fill/nolab/palette=viridis/lev=(-inf)(-600,0,50)(inf) topography[d=1]
+contour/ov/nolab topography[d=1]
+
+!second panel
+label -400, 500,0,90,0.2 "y(km)"
+set viewport v2; fill/nolab/palette=viridis/lev=(-inf)(-600,0,50)(inf) streamfunction1[d=2]
+contour/ov/nolab streamfunction1[d=2]
+label -400, 500,0,90,0.2 "y(km)"
+
+!third panel
+set viewport v3; fill/nolab/palette=viridis/lev=(-inf)(-20,20,2)(inf) streamfunction2[d=3]
+contour/ov/nolab streamfunction2[d=3]
+label -400, 500,0,90,0.2 "y(km)"
+
+!common time axis label
+label 2000,-300,0, 0,0.2 "x(km)"
+
+cancel mode metafile
+spawn Fprint -o ../figures/fig9.ps -l cps -p portrait metafile.plt
+q

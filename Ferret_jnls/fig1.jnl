@@ -1,0 +1,48 @@
+ ! NOAA/PMEL TMAP
+ ! FERRET v6.93  
+ ! Linux 2.6.32-504.16.2.el6.x86_64 64-bit - 11/10/15
+ ! 19-Oct-20 09:56     
+
+go bold
+
+! set transport scaling: = Lx (channel length = 4000km) 
+!                        * U (characteristic speed = 0.1m/s) 
+!                        * H (depth of channel = 5000m) 
+!                        / (2*pi)
+!                        / 1.e6 (to convert to Sverdrups)
+!                        * -1 (sign convention)
+
+let trscale=4000000*0.1*5000/2./3.1415927/1.e6*-1
+
+! read in data
+use ../FR_model_output/qg012.phi_axes.nc
+use ../FR_model_output/qg013.phi_axes.nc
+
+!define a viewport for each panel
+define viewport/x=0:0.8/y=.50:0.95 v1
+define viewport/x=0:0.8/y=.25:0.70 v2
+define viewport/x=0:0.8/y=.00:0.45 v3
+
+set mode metafile
+
+! top panel
+set viewport v1; fill/nolab/palette=viridis streamfunction[d=1]*trscale
+contour/ov/nolab streamfunction[d=1]*trscale
+label -400, 500,0,90,0.2 "y(km)"
+
+! middle panel
+set viewport v2; fill/nolab/palette=viridis streamfunction[d=2]*trscale
+contour/ov/nolab streamfunction[d=2]*trscale
+label -400, 500,0,90,0.2 "y(km)"
+
+! bottom panel
+set viewport v3; fill/nolab/palette=viridis (streamfunction[d=2]-streamfunction[d=1])*trscale
+contour/ov/nolab (streamfunction[d=2]-streamfunction[d=1])*trscale
+label -400, 500,0,90,0.2 "y(km)"
+
+! common x-axis label:
+label 2000,-300,0, 0,0.2 "x(km)"
+
+cancel mode metafile
+spawn Fprint -o ../figures/fig1.ps -l cps -p portrait metafile.plt
+q

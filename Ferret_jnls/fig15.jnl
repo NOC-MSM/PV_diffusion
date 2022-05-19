@@ -1,0 +1,38 @@
+ ! NOAA/PMEL TMAP
+ ! FERRET v6.93  
+ ! Linux 2.6.32-504.16.2.el6.x86_64 64-bit - 11/10/15
+ ! 19-Oct-20 09:56     
+
+go bold
+
+!define axes: channel length = 4000km, width = 1000km
+def ax/x=0:3990:10 xax
+def ax/y=0:1000:10 yax
+
+! define horizontal grid
+def grid/x=xax/y=yax gax
+
+! read in data (first topography, then streamfunction phi)
+file/var=topography/g=gax       ../CR_model_output/fig15a.txt
+file/var=streamfunction/g=gax   ../CR_model_output/fig15b.txt
+
+!define a viewport for each panel
+define viewport/x=0:0.8/y=0.50:0.95 v1
+define viewport/x=0:0.8/y=0.25:0.70 v2
+
+set mode metafile
+
+!first panel
+set viewport v1; fill/nolab/palette=viridis/lev=(-inf)(-400,400,50)(inf) topography[d=1]
+contour/ov/nolab topography[d=1]
+label -400, 500,0,90,0.2 "y(km)"
+
+!second panel
+set viewport v2; fill/nolab/palette=viridis/lev=(-inf)(-600,0,50)(inf) streamfunction[d=2]
+contour/ov/nolab streamfunction[d=2]
+label -400, 500,0,90,0.2 "y(km)"
+label 2000,-300,0, 0,0.2 "x(km)"
+
+cancel mode metafile
+spawn Fprint -o ../figures/fig15.ps -l cps -p portrait metafile.plt
+q
