@@ -1,4 +1,4 @@
-This directory contains all the data required to reproduce the fifteen figures in  the paper
+new This directory contains all the data required to reproduce the fifteen figures in  the paper
 
 Coefficient of Diffusivity of Potential Vorticity and the Eddy Saturation Regime
 
