@@ -1,0 +1,10 @@
+ ! NOAA/PMEL TMAP
+ ! FERRET v7.1 (optimized)
+ ! Linux 2.6.32-573.18.1.el6.x86_64 64-bit - 05/18/17
+ ! 20-Mar-25 16:26     
+
+use qg687.phi.nc
+use qg691.phi.nc
+list/clobber/nohead/format="(e16.8)"/file=qg687.phi.asc STREAMFUNCTION[d=1]
+list/clobber/nohead/format="(e16.8)"/file=qg691.phi.asc STREAMFUNCTION[d=2]
+q

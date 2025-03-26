@@ -1,0 +1,69 @@
+ ! NOAA/PMEL TMAP
+ ! FERRET v7.1 (optimized)
+ ! Linux 2.6.32-573.18.1.el6.x86_64 64-bit - 05/18/17
+ ! 20-Mar-25 14:53     
+
+
+go white
+!go bold
+def viewport/x=0.00:1.00/y=0.00:0.32 v1
+def viewport/x=0.00:1.00/y=0.165:0.485 v2
+def viewport/x=0.00:1.00/y=0.33:0.65 v3
+def viewport/x=0.00:1.00/y=0.495:0.815 v4
+def viewport/x=0.00:1.00/y=0.67:0.99 v5
+def ax/x=0:4010000:10000 xax
+def ax/y=0:1000000:10000 yax
+def grid/x=xax/y=yax gax
+!file/g=gax/var=streamfunction qg687.phi.asc
+file/g=gax/var=streamfunction fig1a.dat
+file/g=gax/var=strf fig1b.dat
+!---
+def grid/x=xax gridx
+def grid/y=yax gridy
+file/g=gridx/var=xx xn.dat
+file/g=gridy/var=yy yn.dat
+!file/g=gax/var=streamfunction qg691.phi.asc
+file/g=gax/var=streamfunction fig1c.dat
+file/g=gax/var=strf fig1d.dat
+file/g=gax/var=topog fig1e.dat
+!---
+let trscale=1000*4000*0.1*5000/2./3.1415927/1.e6*-1
+set mode metafile
+set viewport v5
+shade/palette="blue_red.spk"/lev=(-inf)(-150,150,25)(inf)/nolab  STREAMFUNCTION[d=1]*trscale,xx[d=3]/1000,yy[d=4]/1000
+contour/ov/nolab/spacing=100/lev=(-150,150,50)del(0)/size=0.0001
+LABEL -300,500,0,90,0.1 y(km)
+LABEL 2000,-600,0,0,0.1 x(km)
+!LABEL 2000,1200,0,0,0.1 "Streamfunction times reference depth; FR model; c_2=300 m, @cgt@cr_0=0.1 N/m^2"
+set viewport v4
+shade/palette="blue_red.spk"/lev=(-inf)(-150,150,25)(inf)/nolab  STRF[d=2]*5000/1.e6,xx[d=3]/1000,yy[d=4]/1000
+contour/ov/nolab/spacing=100/lev=(-150,150,50)del(0)/size=0.0001
+LABEL -300,500,0,90,0.1 y(km)
+LABEL 2000,-600,0,0,0.1 x(km)
+!LABEL 2000,1200,0,0,0.1 "Streamfunction times reference depth; CR model; c_2=300 m, @cgt@cr_0=0.1 N/m^2, k_0=165.1 m^2/s"
+
+set viewport v3
+shade/palette="blue_red.spk"/lev=(-inf)(-400,400,100)(inf)/nolab  STREAMFUNCTION[d=5]*trscale,xx[d=3]/1000,yy[d=4]/1000
+contour/ov/nolab/spacing=100/lev=(-400,400,100)del(0)/size=0.0001
+LABEL -300,500,0,90,0.1 y(km)
+LABEL 2000,-600,0,0,0.1 x(km)
+!LABEL 2000,1200,0,0,0.1 "Streamfunction times reference depth; FR model; c_2=300 m, @cgt@cr_0=0.3 N/m^2"
+set viewport v2
+shade/palette="blue_red.spk"/lev=(-inf)(-400,400,100)(inf)/nolab  STRF[d=6]*5000/1.e6,xx[d=3]/1000,yy[d=4]/1000
+contour/ov/nolab/spacing=100/lev=(-400,400,100)del(0)/size=0.0001
+LABEL -300,500,0,90,0.1 y(km)
+LABEL 2000,-600,0,0,0.1 x(km)
+!LABEL 2000,1200,0,0,0.1 "Streamfunction times reference depth; CR model; c_2=300 m, @cgt@cr_0=0.3 N/m^2, k_0=572.9 m^2/s"
+
+set viewport v1
+shade/palette="blue_red.spk"/lev=(-inf)(-250,250,50)(inf)/nolab  topog[d=7],xx[d=3]/1000,yy[d=4]/1000
+contour/ov/nolab/spacing=100/lev=(-250,250,50)del(0)/size=0.0001
+LABEL -300,500,0,90,0.1 y(km)
+LABEL 2000,-600,0,0,0.1 x(km)
+!LABEL 2000,1200,0,0,0.1 "Topography height c_2=300m"
+
+cancel mode metafile
+spawn Fprint -o fig1_noheaders.ps -l cps -p portrait metafile.plt
+spawn convert -density 250x250 fig1_noheaders.ps fig1_noheaders.png
+
+q
