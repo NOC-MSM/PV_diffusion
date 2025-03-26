@@ -10,6 +10,3 @@ the netcdf files contain model output variables (such as streamfunction, kinetic
 the ascii format files contain information about the model run (model parameters such as channel length, max windstress etc
 and run parameters such as number of timesteps and output frequency)
 
-for the simulations used for the figures in the paper (numbers 012, 013 and 030) we generated alternative 
-data files for topography and streamfunction (filenames ending .topog_axes.nc and .phi_axes.nc) these contain
-variables with the x- and y- axes for ease of plotting
